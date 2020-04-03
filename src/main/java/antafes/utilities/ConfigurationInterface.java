@@ -38,4 +38,18 @@ public interface ConfigurationInterface {
     public void setSaveDirPath(String path);
     public void setWindowLocation(Point point);
     public void setExtendedState(int extendedState);
+
+    /**
+     * Get the home directory of the user depending on the used system.
+     *
+     * @return Path to the home directory.
+     */
+    default public String getHomeDirectory()
+    {
+        if (System.getProperty("os.name").contains("Windows")) {
+            return System.getProperty("user.home") + "/Documents/";
+        }
+
+        return System.getProperty("user.home");
+    }
 }
