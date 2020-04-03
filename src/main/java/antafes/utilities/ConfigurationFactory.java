@@ -23,14 +23,14 @@
 package antafes.utilities;
 
 public class ConfigurationFactory {
-    private static Configuration configuration;
+    private static ConfigurationInterface configuration;
 
     /**
      * Get the basic configuration object provided by this package.
      *
      * @return Basic configuration
      */
-    public static Configuration getConfiguration()
+    public static ConfigurationInterface getConfiguration()
     {
         return getConfiguration(Configuration.class);
     }
@@ -42,7 +42,7 @@ public class ConfigurationFactory {
      *
      * @return Given configuration object
      */
-    public static Configuration getConfiguration(Class<Configuration> configuration)
+    public static ConfigurationInterface getConfiguration(Class<? extends ConfigurationInterface> configuration)
     {
         if (ConfigurationFactory.configuration == null) {
             try {
