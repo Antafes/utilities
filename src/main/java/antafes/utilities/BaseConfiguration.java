@@ -31,17 +31,8 @@ import java.util.Properties;
  * Base configuration
  */
 public abstract class BaseConfiguration implements ConfigurationInterface {
-    private final Properties properties;
-    private final File propertiesFile;
-
-    /**
-     * Constructor
-     */
-    BaseConfiguration()
-    {
-        this.propertiesFile = new File(this.getBasePath() + "gui.xml");
-        this.properties = new Properties();
-    }
+    private final Properties properties = new Properties();
+    private final File propertiesFile = new File(this.getBasePath() + "gui.xml");
 
     /**
      * load all saved properties
