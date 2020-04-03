@@ -25,15 +25,31 @@ package antafes.utilities;
 public class ConfigurationFactory {
     private static Configuration configuration;
 
-    public static Configuration getConfiguration() throws InstantiationException, IllegalAccessException
+    /**
+     * Get the basic configuration object provided by this package.
+     *
+     * @return Basic configuration
+     */
+    public static Configuration getConfiguration()
     {
         return getConfiguration(Configuration.class);
     }
 
-    public static Configuration getConfiguration(Class<Configuration> configuration) throws IllegalAccessException, InstantiationException
+    /**
+     * Get the given configuration object.
+     *
+     * @param configuration The configuration object to create
+     *
+     * @return Given configuration object
+     */
+    public static Configuration getConfiguration(Class<Configuration> configuration)
     {
         if (ConfigurationFactory.configuration == null) {
-            ConfigurationFactory.configuration = configuration.newInstance();
+            try {
+                ConfigurationFactory.configuration = configuration.newInstance();
+            } catch (InstantiationException | IllegalAccessException ignored) {
+                // This should never happen!
+            }
         }
 
         return ConfigurationFactory.configuration;
