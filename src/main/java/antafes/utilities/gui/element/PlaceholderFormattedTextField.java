@@ -19,7 +19,7 @@
  * @copyright (c) 2020, Marian Pollzien
  * @license https://www.gnu.org/licenses/lgpl.html LGPLv3
  */
-package antafes.utilities.gui;
+package antafes.utilities.gui.element;
 
 import lombok.Getter;
 import lombok.Setter;

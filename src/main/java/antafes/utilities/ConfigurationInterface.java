@@ -22,6 +22,7 @@
 
 package antafes.utilities;
 
+import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 
@@ -38,6 +39,8 @@ public interface ConfigurationInterface {
     public void setSaveDirPath(String path);
     public void setWindowLocation(Point point);
     public void setExtendedState(int extendedState);
+    public antafes.utilities.language.LanguageInterface getLanguageObject();
+    public LanguageInterface getLanguage();
 
     /**
      * Get the home directory of the user depending on the used system.
@@ -51,5 +54,15 @@ public interface ConfigurationInterface {
         }
 
         return System.getProperty("user.home");
+    }
+
+    public interface LanguageInterface {
+        public String getLanguageString();
+        public String getName();
+        public ImageIcon getIcon();
+
+        public static LanguageInterface valueOf(String name) {
+            return null;
+        }
     }
 }

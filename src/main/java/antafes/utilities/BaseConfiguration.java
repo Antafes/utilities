@@ -26,6 +26,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.*;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Base configuration
@@ -213,5 +215,33 @@ public abstract class BaseConfiguration implements ConfigurationInterface {
     public void setExtendedState(int extendedState)
     {
         this.properties.setProperty("extendedState", Integer.toString(extendedState));
+    }
+
+    /**
+     * Get the selected language.
+     *
+     * @return Language enum of the selected language
+     */
+    public LanguageInterface getLanguage()
+    {
+        return LanguageInterface.valueOf(this.properties.getProperty("language"));
+    }
+
+    /**
+     * Get a language object from the currently selected language.
+     *
+     * @return Language object fetched from the enum of the currently selected language
+     */
+    public antafes.utilities.language.LanguageInterface getLanguageObject()
+    {
+        antafes.utilities.language.LanguageInterface language = null;
+
+        try {
+            language = (antafes.utilities.language.LanguageInterface) Class.forName(this.getLanguage().getLanguageString()).newInstance();
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+            Logger.getLogger(Configuration.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return language;
     }
 }

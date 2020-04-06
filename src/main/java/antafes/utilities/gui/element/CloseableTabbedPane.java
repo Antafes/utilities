@@ -20,7 +20,7 @@
  * @license https://www.gnu.org/licenses/lgpl.html LGPLv3
  */
 
-package antafes.utilities.gui;
+package antafes.utilities.gui.element;
 
 import antafes.utilities.Utilities;
 

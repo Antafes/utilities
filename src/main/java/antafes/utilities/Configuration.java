@@ -22,6 +22,11 @@
 
 package antafes.utilities;
 
+import lombok.Getter;
+
+import javax.swing.*;
+import java.awt.*;
+
 /**
  * Configuration data
  */
@@ -29,5 +34,31 @@ public class Configuration extends BaseConfiguration {
     @Override
     public String getBasePath() {
         return System.getProperty("user.home") + "/";
+    }
+
+    @Override
+    public Language getLanguage() {
+        return (Language) super.getLanguage();
+    }
+
+    @Getter
+    public enum Language implements LanguageInterface {
+        ENGLISH ("antafes.utilities.language.English", "English", "images/english.png"),
+        GERMAN ("antafes.utilities.language.German", "German", "images/german.png");
+
+        private final String languageString;
+        private final String name;
+        private final ImageIcon icon;
+
+        Language(String languageString, String name, String iconPath) {
+            this.languageString = languageString;
+            this.name = name;
+
+            Toolkit kit = Toolkit.getDefaultToolkit();
+            Image img = kit.createImage(
+                Utilities.getResourceInJar(iconPath)
+            );
+            this.icon = new ImageIcon(img);
+        }
     }
 }
