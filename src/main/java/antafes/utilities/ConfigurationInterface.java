@@ -39,8 +39,9 @@ public interface ConfigurationInterface {
     public void setSaveDirPath(String path);
     public void setWindowLocation(Point point);
     public void setExtendedState(int extendedState);
-    public antafes.utilities.language.LanguageInterface getLanguageObject();
+    public void setLanguage(LanguageInterface language);
     public LanguageInterface getLanguage();
+    public antafes.utilities.language.LanguageInterface getLanguageObject();
 
     /**
      * Get the home directory of the user depending on the used system.

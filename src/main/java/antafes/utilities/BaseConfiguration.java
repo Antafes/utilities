@@ -218,6 +218,16 @@ public abstract class BaseConfiguration implements ConfigurationInterface {
     }
 
     /**
+     * Set the selected language.
+     *
+     * @param language The language that has been selected.
+     */
+    @Override
+    public void setLanguage(LanguageInterface language) {
+        properties.setProperty("language", language.toString());
+    }
+
+    /**
      * Get the selected language.
      *
      * @return Language enum of the selected language
