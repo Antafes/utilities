@@ -22,6 +22,9 @@
 
 package antafes.utilities;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
@@ -33,6 +36,7 @@ import java.util.logging.Logger;
  * Base configuration
  */
 public abstract class BaseConfiguration implements ConfigurationInterface {
+    @Getter(AccessLevel.PROTECTED)
     private final Properties properties = new Properties();
     private final File propertiesFile = new File(this.getBasePath() + "gui.xml");
 
