@@ -30,7 +30,7 @@ import java.util.Vector;
  *
  * @author Marian Pollzien
  */
-public class WideComboBox extends JComboBox {
+public class WideComboBox<E> extends JComboBox<E> {
 
     /**
      * Create a new wide combo box.
@@ -45,7 +45,7 @@ public class WideComboBox extends JComboBox {
      * @param items An array of objects to insert into the combo box
      * @see DefaultComboBoxModel
      */
-    public WideComboBox(final Object[] items){
+    public WideComboBox(E[] items){
         super(items);
     }
 
@@ -56,7 +56,7 @@ public class WideComboBox extends JComboBox {
      * @param items An array of vectors to insert into the combo box
      * @see DefaultComboBoxModel
      */
-    public WideComboBox(Vector items) {
+    public WideComboBox(Vector<E> items) {
         super(items);
     }
 
@@ -68,7 +68,7 @@ public class WideComboBox extends JComboBox {
      * @param aModel The ComboBoxModel that provides the displayed list of items
      * @see DefaultComboBoxModel
      */
-    public WideComboBox(ComboBoxModel aModel) {
+    public WideComboBox(ComboBoxModel<E> aModel) {
         super(aModel);
     }
 
