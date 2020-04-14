@@ -21,6 +21,8 @@
  */
 package antafes.utilities.gui.element;
 
+import lombok.Getter;
+
 import javax.swing.*;
 import javax.swing.event.ChangeListener;
 import javax.swing.plaf.SliderUI;
@@ -32,6 +34,8 @@ public class ValueSlider extends JPanel
 {
     private JSlider slider;
     private JLabel valueField;
+    @Getter
+    private String additionalText;
 
     public ValueSlider(LayoutManager layout, boolean isDoubleBuffered)
     {
@@ -103,9 +107,25 @@ public class ValueSlider extends JPanel
         valueField = new JLabel();
         valueField.setHorizontalAlignment(JLabel.LEFT);
         valueField.setFont(valueField.getFont().deriveFont(20f));
-        valueField.setText("" + slider.getValue());
+        valueField.setText(getFormattedValue());
         valueField.setSize(calculateValueFieldWidth(), getHeight());
-        slider.addChangeListener(ce -> valueField.setText("" + slider.getValue()));
+        slider.addChangeListener(ce -> valueField.setText(getFormattedValue()));
+    }
+
+    /**
+     * The value with optional additional text added.
+     *
+     * @return The value as string
+     */
+    private String getFormattedValue()
+    {
+        String value = "" + slider.getValue();
+
+        if (!additionalText.isEmpty()) {
+            value += " " + additionalText;
+        }
+
+        return value;
     }
 
     private void init()
