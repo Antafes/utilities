@@ -22,6 +22,7 @@
 package antafes.utilities.gui.element;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.swing.*;
 import javax.swing.event.ChangeListener;
@@ -34,6 +35,7 @@ public class ValueSlider extends JPanel
 {
     private JSlider slider;
     private JLabel valueField;
+    @Setter
     @Getter
     private String additionalText;
 
