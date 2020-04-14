@@ -71,6 +71,7 @@ public class CloseableTabbedPane extends JTabbedPane {
      */
     public CloseableTabbedPane(int tabPlacement, int tabLayoutPolicy) {
         super(tabPlacement, tabLayoutPolicy);
+        tabLabels = new HashMap<>();
     }
 
     /**
