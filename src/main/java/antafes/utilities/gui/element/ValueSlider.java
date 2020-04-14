@@ -139,7 +139,7 @@ public class ValueSlider extends JPanel
     {
         String value = "" + slider.getValue();
 
-        if (!additionalText.isEmpty()) {
+        if (additionalText != null && !additionalText.isEmpty()) {
             value += " " + additionalText;
         }
 
