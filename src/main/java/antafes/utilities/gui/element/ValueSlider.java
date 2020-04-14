@@ -80,9 +80,25 @@ public class ValueSlider extends JPanel
         this(JSlider.HORIZONTAL, min, max, value);
     }
 
+    public ValueSlider(int orientation, int min, int max, int value, String additionalText)
+    {
+        this.additionalText = additionalText;
+        initSlider(orientation, min, max, value);
+        initLabel();
+        init();
+    }
+
     public ValueSlider(int orientation, int min, int max, int value)
     {
         initSlider(orientation, min, max, value);
+        initLabel();
+        init();
+    }
+
+    public ValueSlider(BoundedRangeModel brm, String additionalText)
+    {
+        this.additionalText = additionalText;
+        slider = new JSlider(brm);
         initLabel();
         init();
     }
