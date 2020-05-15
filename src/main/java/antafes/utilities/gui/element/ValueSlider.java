@@ -188,7 +188,11 @@ public class ValueSlider extends JPanel
             @Override
             public void focusLost(FocusEvent e)
             {
-                transferFocus();
+                if (e.getCause().equals(FocusEvent.Cause.TRAVERSAL_FORWARD)) {
+                    transferFocus();
+                } else {
+                    transferFocusBackward();
+                }
             }
         });
     }
