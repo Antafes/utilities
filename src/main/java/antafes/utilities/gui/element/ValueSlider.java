@@ -170,12 +170,25 @@ public class ValueSlider extends JPanel
             @Override
             public void focusGained(FocusEvent e)
             {
-                slider.grabFocus();
+                slider.requestFocusInWindow();
             }
 
             @Override
             public void focusLost(FocusEvent e)
             {
+            }
+        });
+        slider.addFocusListener(new FocusListener()
+        {
+            @Override
+            public void focusGained(FocusEvent e)
+            {
+            }
+
+            @Override
+            public void focusLost(FocusEvent e)
+            {
+                transferFocus();
             }
         });
     }
