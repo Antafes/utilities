@@ -544,11 +544,20 @@ public class ValueSlider extends JPanel
             initSlider(JSlider.HORIZONTAL, 0, 100, 50);
         }
 
+        slider.setFont(font);
+    }
+
+    /**
+     * Set the font of the value field.
+     *
+     * @param font the desired Font for the value field
+     */
+    public void setValueFieldFont(Font font)
+    {
         if (valueField == null) {
             initLabel();
         }
 
-        slider.setFont(font);
         valueField.setFont(font);
     }
 
