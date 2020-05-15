@@ -28,6 +28,8 @@ import javax.swing.*;
 import javax.swing.event.ChangeListener;
 import javax.swing.plaf.SliderUI;
 import java.awt.*;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.util.Dictionary;
 import java.util.Hashtable;
 
@@ -155,6 +157,27 @@ public class ValueSlider extends JPanel
         this.setLayout(layout);
         this.add(slider);
         this.add(valueField);
+        this.addFocusListener();
+    }
+
+    /**
+     * Add a focus listener to the panel which redirects the focus to the slider.
+     */
+    private void addFocusListener()
+    {
+        addFocusListener(new FocusListener()
+        {
+            @Override
+            public void focusGained(FocusEvent e)
+            {
+                slider.grabFocus();
+            }
+
+            @Override
+            public void focusLost(FocusEvent e)
+            {
+            }
+        });
     }
 
     /**
