@@ -211,7 +211,7 @@ public class OrderFocusTraversalPolicy extends FocusTraversalPolicy
      */
     private Component getPreviousVisibleComponent(int idx)
     {
-        for (int i = idx; i < order.size(); i++) {
+        for (int i = idx; i >= 0; i--) {
             if (order.get(i).isVisible()) {
                 return order.get(i);
             }
