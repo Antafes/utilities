@@ -57,9 +57,8 @@ public class OrderFocusTraversalPolicy extends FocusTraversalPolicy
      * @return The next component
      */
     @Override
-    public Component getComponentAfter(
-        Container focusCycleRoot, Component aComponent
-    ) {
+    public Component getComponentAfter(Container focusCycleRoot, Component aComponent)
+    {
         int idx = (order.indexOf(aComponent) + 1) % order.size();
 
         if (order.indexOf(aComponent) == -1) {
@@ -69,7 +68,7 @@ public class OrderFocusTraversalPolicy extends FocusTraversalPolicy
 
                     if (((JSpinner.DefaultEditor) element.getEditor()).getTextField().equals(aComponent)) {
                         idx = (order.indexOf(component) + 1) % order.size();
-                        Component nextElement = order.get(idx);
+                        Component nextElement = getNextVisibleComponent(idx);
 
                         if (nextElement instanceof JSpinner) {
                             return ((JSpinner.DefaultEditor) ((JSpinner) nextElement).getEditor()).getTextField();
@@ -81,11 +80,13 @@ public class OrderFocusTraversalPolicy extends FocusTraversalPolicy
             }
         }
 
-        if (order.get(idx) instanceof JSpinner) {
-            return ((JSpinner.DefaultEditor) ((JSpinner) order.get(idx)).getEditor()).getTextField();
+        Component nextElement = getNextVisibleComponent(idx);
+
+        if (nextElement instanceof JSpinner) {
+            return ((JSpinner.DefaultEditor) ((JSpinner) nextElement).getEditor()).getTextField();
         }
 
-        return order.get(idx);
+        return nextElement;
     }
 
     /**
@@ -97,9 +98,8 @@ public class OrderFocusTraversalPolicy extends FocusTraversalPolicy
      * @return The previous component
      */
     @Override
-    public Component getComponentBefore(
-        Container focusCycleRoot, Component aComponent
-    ) {
+    public Component getComponentBefore(Container focusCycleRoot, Component aComponent)
+    {
         int idx = order.indexOf(aComponent) - 1;
 
         if (idx < 0) {
@@ -118,7 +118,7 @@ public class OrderFocusTraversalPolicy extends FocusTraversalPolicy
                             idx = order.size() - 1;
                         }
 
-                        Component previousElement = order.get(idx);
+                        Component previousElement = getPreviousVisibleComponent(idx);
 
                         if (previousElement instanceof JSpinner) {
                             return ((JSpinner.DefaultEditor) ((JSpinner) previousElement).getEditor()).getTextField();
@@ -130,7 +130,7 @@ public class OrderFocusTraversalPolicy extends FocusTraversalPolicy
             }
         }
 
-        return order.get(idx);
+        return getPreviousVisibleComponent(idx);
     }
 
     /**
@@ -141,7 +141,8 @@ public class OrderFocusTraversalPolicy extends FocusTraversalPolicy
      * @return First element in the order list
      */
     @Override
-    public Component getDefaultComponent(Container focusCycleRoot) {
+    public Component getDefaultComponent(Container focusCycleRoot)
+    {
         return order.get(0);
     }
 
@@ -153,7 +154,8 @@ public class OrderFocusTraversalPolicy extends FocusTraversalPolicy
      * @return Last element in the order list
      */
     @Override
-    public Component getLastComponent(Container focusCycleRoot) {
+    public Component getLastComponent(Container focusCycleRoot)
+    {
         Component component = order.lastElement();
 
         if (component instanceof JSpinner) {
@@ -171,7 +173,8 @@ public class OrderFocusTraversalPolicy extends FocusTraversalPolicy
      * @return First element in the order list
      */
     @Override
-    public Component getFirstComponent(Container focusCycleRoot) {
+    public Component getFirstComponent(Container focusCycleRoot)
+    {
         Component component = order.get(0);
 
         if (component instanceof JSpinner) {
@@ -179,5 +182,41 @@ public class OrderFocusTraversalPolicy extends FocusTraversalPolicy
         }
 
         return component;
+    }
+
+    /**
+     * Get the next visible component in the list of components.
+     *
+     * @param idx The start point from which to look on forward.
+     *
+     * @return The next component or null if none found
+     */
+    private Component getNextVisibleComponent(int idx)
+    {
+        for (int i = idx; i < order.size(); i++) {
+            if (order.get(i).isVisible()) {
+                return order.get(i);
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Get the previous visible component in the list of components.
+     *
+     * @param idx The start point from which to look on backward.
+     *
+     * @return The previous component or null if none found
+     */
+    private Component getPreviousVisibleComponent(int idx)
+    {
+        for (int i = idx; i < order.size(); i++) {
+            if (order.get(i).isVisible()) {
+                return order.get(i);
+            }
+        }
+
+        return null;
     }
 }
