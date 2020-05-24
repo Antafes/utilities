@@ -19,12 +19,12 @@ cat > ${M2_HOME}/settings.xml <<EOF
                           https://maven.apache.org/xsd/settings-1.0.0.xsd">
 
     <activeProfiles>
-        <activeProfile>github</activeProfile>
+        <activeProfile>github-utilities</activeProfile>
     </activeProfiles>
 
     <profiles>
         <profile>
-            <id>github</id>
+            <id>github-utilities</id>
             <repositories>
                 <repository>
                     <id>github</id>
@@ -37,7 +37,7 @@ cat > ${M2_HOME}/settings.xml <<EOF
 
     <servers>
         <server>
-            <id>github</id>
+            <id>github-utilities</id>
             <username>Antafes</username>
             <password>${ACCESS_TOKEN}</password>
         </server>

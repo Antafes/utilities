@@ -28,11 +28,11 @@
 
     <groupId>antafes</groupId>
     <artifactId>Utilities</artifactId>
-    <version>2.1.1</version>
+    <version>2.1.2</version>
 
     <distributionManagement>
         <repository>
-            <id>github</id>
+            <id>github-utilities</id>
             <name>GitHub Antafes Apache Maven Packages</name>
             <url>https://maven.pkg.github.com/Antafes/Utilities</url>
         </repository>
@@ -40,7 +40,7 @@
 
     <properties>
         <!-- github server corresponds to entry in ~/.m2/settings.xml -->
-        <github.global.server>github</github.global.server>
+        <github.global.server>github-utilities</github.global.server>
         <maven.compiler.release>9</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
