@@ -45,4 +45,4 @@ cat > ${M2_HOME}/settings.xml <<EOF
 </settings>
 EOF
 
-mvn -Dmaven.test.skip=true deploy
+mvn -Dmaven.test.skip=true -Dmaven.wagon.http.pool=false deploy

@@ -56,7 +56,7 @@ jobs:
           type: docker-image
           source:
             repository: maven
-            tag: 3-jdk-14
+            tag: 3-openjdk-15
         inputs:
           - name: utilities-repo-pr
         run:
@@ -86,7 +86,7 @@ jobs:
         type: docker-image
         source:
           repository: maven
-          tag: 3-jdk-14
+          tag: 3-openjdk-15
       inputs:
       - name: utilities-release
       - name: utilities-repo-dev
@@ -131,7 +131,7 @@ jobs:
         type: docker-image
         source:
           repository: maven
-          tag: 3-jdk-14
+          tag: 3-openjdk-15
       inputs:
       - name: utilities-repo
       outputs:
@@ -154,7 +154,7 @@ jobs:
         type: docker-image
         source:
           repository: maven
-          tag: 3-jdk-14
+          tag: 3-openjdk-15
       inputs:
           - name: utilities-repo
       run:
