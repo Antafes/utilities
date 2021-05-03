@@ -29,7 +29,7 @@ cat > ${M2_HOME}/settings.xml <<EOF
                 <repository>
                     <id>github</id>
                     <name>GitHub Antafes Apache Maven Packages</name>
-                    <url>https://maven.pkg.github.com/Antafes</url>
+                    <url>https://maven.pkg.github.com/Antafes/Utilities</url>
                 </repository>
             </repositories>
         </profile>
