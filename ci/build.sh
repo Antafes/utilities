@@ -11,7 +11,7 @@ then
     ln -s "${M2_CACHE}" "${M2_HOME}"
 fi
 
-VERSION=`cat VERSION`
+VERSION=$(cat VERSION)
 
 # Start build without tests
 mvn -Dmaven.test.skip=true clean package

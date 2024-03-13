@@ -1,0 +1,50 @@
+/*
+ * This file is part of Utilities.
+ *
+ * Utilities is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Utilities is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with Utilities. If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @package Utilities
+ * @author Marian Pollzien <map@wafriv.de>
+ * @copyright (c) 2020, Marian Pollzien
+ * @license https://www.gnu.org/licenses/lgpl.html LGPLv3
+ */
+
+package antafes.utilities;
+
+import java.io.InputStream;
+import java.net.URL;
+
+public class Utilities {
+    /**
+     * Get a file inside of the generated JAR.
+     *
+     * @param path Path of the file
+     *
+     * @return InputStream of the fetched file
+     */
+    public static InputStream getFileInJar(String path) {
+        return Utilities.class.getClassLoader().getResourceAsStream(path);
+    }
+
+    /**
+     * Get a resource inside of the generated JAR.
+     *
+     * @param path Path of the file
+     *
+     * @return URL object of the file
+     */
+    public static URL getResourceInJar(String path) {
+        return Utilities.class.getClassLoader().getResource(path);
+    }
+}
