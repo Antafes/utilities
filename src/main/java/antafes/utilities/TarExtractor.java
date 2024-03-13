@@ -47,17 +47,17 @@ public class TarExtractor
 
     public void untar() throws IOException
     {
-        try (BufferedInputStream inputStream = new BufferedInputStream(this.tarStream);
-             TarArchiveInputStream tar = new TarArchiveInputStream(
-                 this.gzip ? new GzipCompressorInputStream(inputStream) : inputStream)) {
-            ArchiveEntry entry;
-            while ((entry = tar.getNextEntry()) != null) {
-                Path extractTo = this.destination.resolve(entry.getName());
-                if (entry.isDirectory()) {
-                    Files.createDirectories(extractTo);
-                } else {
-                    Files.copy(tar, extractTo);
-                }
+        BufferedInputStream inputStream = new BufferedInputStream(this.tarStream);
+         TarArchiveInputStream tar = new TarArchiveInputStream(
+             this.gzip ? new GzipCompressorInputStream(inputStream) : inputStream
+         );
+        ArchiveEntry entry;
+        while ((entry = tar.getNextEntry()) != null) {
+            Path extractTo = this.destination.resolve(entry.getName());
+            if (entry.isDirectory()) {
+                Files.createDirectories(extractTo);
+            } else {
+                Files.copy(tar, extractTo);
             }
         }
     }
