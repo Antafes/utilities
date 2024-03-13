@@ -45,7 +45,7 @@ public class TarBuilder
         this.gzip = gzip;
     }
 
-    public boolean tar(ArrayList<File> files) throws IOException
+    public boolean tar(ArrayList<File> files)
     {
         AtomicBoolean successful = new AtomicBoolean(true);
         try (BufferedOutputStream outputStream = new BufferedOutputStream(this.tarStream))
@@ -68,6 +68,8 @@ public class TarBuilder
             if (successful.get()) {
                 tar.finish();
             }
+        } catch (IOException e) {
+            successful.set(false);
         }
 
         return successful.get();
