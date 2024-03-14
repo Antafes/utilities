@@ -30,7 +30,11 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -53,13 +57,11 @@ public class TarBuilder
             TarArchiveOutputStream tar = new TarArchiveOutputStream(
                 this.gzip ? new GzipCompressorOutputStream(outputStream) : outputStream
             );
+            tar.setLongFileMode(TarArchiveOutputStream.LONGFILE_POSIX);
 
             files.forEach((file) -> {
                 try {
-                    TarArchiveEntry entry = tar.createArchiveEntry(file, file.getName());
-                    tar.putArchiveEntry(entry);
-                    Files.copy(file.toPath(), tar);
-                    tar.closeArchiveEntry();
+                    this.createArchiveEntry(tar, file);
                 } catch (IOException ignored) {
                     successful.set(false);
                 }
@@ -67,11 +69,39 @@ public class TarBuilder
 
             if (successful.get()) {
                 tar.finish();
+                tar.close();
             }
         } catch (IOException e) {
             successful.set(false);
         }
 
         return successful.get();
+    }
+
+    private void createArchiveEntry(TarArchiveOutputStream tar, File source) throws IOException
+    {
+        Files.walkFileTree(source.toPath(), new SimpleFileVisitor<>() {
+            @Override
+            public FileVisitResult visitFile(Path file, BasicFileAttributes attributes) throws IOException
+            {
+                if (attributes.isSymbolicLink()) {
+                    return FileVisitResult.CONTINUE;
+                }
+
+                Path targetFile = source.getParentFile().toPath().relativize(file);
+                TarArchiveEntry tarEntry = new TarArchiveEntry(file.toFile(), targetFile.toString());
+                tar.putArchiveEntry(tarEntry);
+                Files.copy(file, tar);
+                tar.closeArchiveEntry();
+
+                return FileVisitResult.CONTINUE;
+            }
+
+            @Override
+            public FileVisitResult visitFileFailed(Path file, IOException exc) {
+                return FileVisitResult.CONTINUE;
+            }
+
+        });
     }
 }
